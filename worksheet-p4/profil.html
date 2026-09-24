@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--
+  KERANGKA AWAL — Halaman Profil Saya
+  PABW 2026/2027 · Pertemuan 3
+
+  Cara pakai:
+  1. Salin berkas ini, ganti nama menjadi profil.html
+  2. Ganti setiap tulisan TODO dengan isi milik Anda SENDIRI
+  3. Simpan, lalu buka di peramban (F5 untuk memuat ulang)
+  4. Kerjakan berurutan mengikuti Lembar B, C, D, dan E pada worksheet
+
+  Jangan menghapus komentar TODO sebelum bagian itu Anda kerjakan —
+  komentar itu adalah daftar periksa Anda sendiri.
+-->
+<html lang="id">
+<head>
+     <title>Matematika bersama dina</title>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+     <header id="Home">
+          <h1>Matematika bersama Dina</h1>
+          <p>Mudah dan menyenangkan</p>
+          <nav aria-label="Navigasi utama">
+               <ul>
+                    <li><a href="#Home">Home</a></li>
+                    <li><a href="#Study">Study</a></li>
+                    <li><a href="#Bio">Bio</a></li>
+               </ul>
+          </nav>
+     </header>
+
+  <main>
+          <section id="Study">
+               <h2>Belajar bersama</h2>
+
+               <figure>
+                    <img src="gambar1.jpg" alt="Ilustrasi pembelajaran matematika" width="640" height="360" loading="lazy">
+                    <figcaption>Gambar pendukung pembelajaran matematika</figcaption>
+               </figure>
+
+               <table>
+                    <caption>Daftar Rumus Matematika Dasar</caption>
+                    <thead>
+                         <tr>
+                              <th scope="col">Rumus</th>
+                              <th scope="col">Penemu (fun fact)</th>
+                              <th scope="col">Soal Latihan</th>
+                         </tr>
+                    </thead>
+                    <tbody>
+                         <tr>
+                              <th scope="row">Luas persegi = s x s</th>
+                              <td>Bangsa Mesir Kuno menggunakan geometri untuk mengukur tanah.</td>
+                              <td>Jika sisi persegi 6 cm, berapa luasnya?</td>
+                         </tr>
+                         <tr>
+                              <th scope="row">Luas segitiga = 1/2 x a x t</th>
+                              <td>Thales dikenal sebagai salah satu tokoh awal geometri Yunani.</td>
+                              <td>Jika alas 8 cm dan tinggi 5 cm, berapa luasnya?</td>
+                         </tr>
+                         <tr>
+                              <th scope="row">Luas lingkaran = pi x r x r</th>
+                              <td>Nilai pi digunakan untuk menghitung ukuran lingkaran.</td>
+                              <td>Jika jari-jari 7 cm, berapa luas lingkarannya?</td>
+                         </tr>
+                    </tbody>
+               </table>
+    </section>
+
+          <section id="Bio">
+               <h2>Bio yang mengerjakan</h2>
+
+               <form action="/simpan" method="post">
+                    <p>
+                         <label for="nama">Nama</label>
+                         <input type="text" id="nama" name="nama" required>
+                    </p>
+                    <p>
+                         <label for="kelas">Kelas</label>
+                         <input type="text" id="kelas" name="kelas" required>
+                    </p>
+                    <p>
+                         <label for="umur">Umur</label>
+                         <input type="number" id="umur" name="umur" min="1" required>
+                    </p>
+                    <button type="submit">Simpan</button>
+               </form>
+    </section>
+  </main>
+
+     <footer id="Kontak">
+          <p>Sa'adina Lutfia Rahmat · 25523033 · 2026</p>
+     </footer>
+
+</body>
+</html>
