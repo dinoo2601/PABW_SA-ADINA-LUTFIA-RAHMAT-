@@ -1,5 +1,5 @@
 
-const ALAMAT = 'data/proyek.json';
+const ALAMAT = 'https://raw.githubusercontent.com/dinoo2601/PABW_SA-ADINA-LUTFIA-RAHMAT-/refs/heads/main/worksheet-p10/data/proyek.json';
 
 export async function ambilProyek() {
   try {
@@ -23,6 +23,4 @@ export async function ambilProyek() {
     console.error('Gagal memuat:', galat.message);
     throw galat;
   }
-}ambilProyek()
-  .then(data => console.log('Berhasil:', data))
-  .catch(galat => console.error('Tes gagal:', galat.message));
+}

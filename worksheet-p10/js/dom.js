@@ -20,13 +20,15 @@ function buatKartu(materi) {
   kartu.append(judul, deskripsi, rumus);
   return kartu;
 }
-
+  
 export function render(daftarMateri) {
   if (!daftar || !pesanKosong) {
     throw new Error("Elemen daftar atau pesan kosong tidak ditemukan.");
   }
 
   daftar.replaceChildren();
+
+  if (pesanGalat) pesanGalat.hidden = true;
 
   if (daftarMateri.length === 0) {
     pesanKosong.hidden = false;
@@ -39,6 +41,7 @@ export function render(daftarMateri) {
     daftar.append(buatKartu(materi));
   });
 }
+
 
 export function aturMemuat(status) {
   if (pesanMuat) pesanMuat.hidden = !status;
