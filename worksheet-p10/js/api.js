@@ -1,5 +1,5 @@
 
-const ALAMAT = 'data/proyek-tidak-ada.json';
+const ALAMAT = 'data/proyek.json';
 
 export async function ambilProyek() {
   try {
