@@ -1,4 +1,4 @@
-import { pilihKategori, tambahFavorit } from './state.js';
+import { aturUlang, pilihKategori, tambahFavorit } from './state.js';
 
 export function pasangPendengar() {
   document.querySelectorAll(".filter").forEach((tombol) => {
@@ -12,6 +12,13 @@ export function pasangPendengar() {
       pilihKategori(nilai);
     });
   });
+
+  const tombolAturUlang = document.querySelector("#atur-ulang");
+  if (!tombolAturUlang) {
+    throw new Error("Tombol atur ulang tidak ditemukan.");
+  }
+
+  tombolAturUlang.addEventListener("click", aturUlang);
 
   const daftar = document.querySelector("#daftar");
   if (!daftar) {
