@@ -1,10 +1,36 @@
 
+import {
+  profil,
+  buatPerkenalan,
+  formatKeahlian,
+  saring,
+} from './data.js';
+
+const judulHalaman = document.querySelector("#Home h1");
+const peranHalaman = document.querySelector("#Home > p");
+const identitasFooter = document.querySelector("#Kontak p");
 const daftar = document.querySelector("#daftar");
 const pesanKosong = document.querySelector("#kosong");
 const pesanMuat = document.querySelector("#muat");
 const pesanGalat = document.querySelector("#galat");
-
 const filterElements = document.querySelectorAll(".filter");
+
+if (
+  !judulHalaman ||
+  !peranHalaman ||
+  !identitasFooter ||
+  !daftar ||
+  !pesanKosong
+) {
+  throw new Error("Elemen halaman yang dibutuhkan tidak ditemukan.");
+}
+
+document.title = profil.judul;
+judulHalaman.textContent = profil.judul;
+peranHalaman.textContent = profil.peran;
+identitasFooter.textContent = `${profil.nama} · ${profil.nim} · ${profil.tahun}`;
+console.log(buatPerkenalan(profil));
+console.log(formatKeahlian(profil.keahlian));
 
 function buatKartu(materi) {
   const kartu = document.createElement("li");
@@ -21,27 +47,33 @@ function buatKartu(materi) {
   return kartu;
 }
   
-export function render(daftarMateri) {
-  if (!daftar || !pesanKosong) {
-    throw new Error("Elemen daftar atau pesan kosong tidak ditemukan.");
-  }
-
+export function render({ daftarProyek, kategori }) {
   daftar.replaceChildren();
 
   if (pesanGalat) pesanGalat.hidden = true;
 
-  if (daftarMateri.length === 0) {
+  const materiTerpilih = saring(daftarProyek, kategori);
+
+  if (materiTerpilih.length === 0) {
     pesanKosong.hidden = false;
     return;
   }
 
   pesanKosong.hidden = true;
 
-  daftarMateri.forEach((materi) => {
+  materiTerpilih.forEach((materi) => {
     daftar.append(buatKartu(materi));
   });
 }
 
+export function aturFilterAktif(kategori) {
+  filterElements.forEach((tombol) => {
+    tombol.setAttribute(
+      "aria-pressed",
+      String(tombol.dataset.filter === kategori)
+    );
+  });
+}
 
 export function aturMemuat(status) {
   if (pesanMuat) pesanMuat.hidden = !status;
