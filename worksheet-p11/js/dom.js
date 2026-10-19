@@ -32,27 +32,37 @@ identitasFooter.textContent = `${profil.nama} · ${profil.nim} · ${profil.tahun
 console.log(buatPerkenalan(profil));
 console.log(formatKeahlian(profil.keahlian));
 
-function buatKartu(materi) {
+function buatKartu(materi, favorit) {
   const kartu = document.createElement("li");
   const judul = document.createElement("h3");
   const deskripsi = document.createElement("p");
   const rumus = document.createElement("p");
+  const tombolFavorit = document.createElement("button");
 
   kartu.className = "kartu";
   judul.textContent = materi.judul;
   deskripsi.textContent = materi.deskripsi;
   rumus.textContent = `Rumus: ${materi.rumus}`;
+  tombolFavorit.className = "favorit";
+  tombolFavorit.dataset.id = String(materi.id);
+  tombolFavorit.textContent = favorit.includes(materi.id) ? "★" : "☆";
+  tombolFavorit.setAttribute("aria-label", `Favorit: ${materi.judul}`);
+  tombolFavorit.setAttribute(
+    "aria-pressed",
+    String(favorit.includes(materi.id))
+  );
 
-  kartu.append(judul, deskripsi, rumus);
+  kartu.append(judul, deskripsi, rumus, tombolFavorit);
   return kartu;
 }
   
-export function render({ daftarProyek, kategori }) {
+export function render(state) {
   daftar.replaceChildren();
 
   if (pesanGalat) pesanGalat.hidden = true;
 
-  const materiTerpilih = saring(daftarProyek, kategori);
+  aturFilterAktif(state.kategoriAktif);
+  const materiTerpilih = saring(state.daftarProyek, state.kategoriAktif);
 
   if (materiTerpilih.length === 0) {
     pesanKosong.hidden = false;
@@ -62,7 +72,7 @@ export function render({ daftarProyek, kategori }) {
   pesanKosong.hidden = true;
 
   materiTerpilih.forEach((materi) => {
-    daftar.append(buatKartu(materi));
+    daftar.append(buatKartu(materi, state.favorit));
   });
 }
 

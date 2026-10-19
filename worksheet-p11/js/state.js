@@ -2,7 +2,8 @@ import { render } from './dom.js';
 
 export const state = {
   daftarProyek: [],
-  kategori: "semua",
+  kategoriAktif: "semua",
+  favorit: [],
 };
 
 export function isiProyek(daftar) {
@@ -10,7 +11,14 @@ export function isiProyek(daftar) {
   render(state);
 }
 
-export function aturKategori(kategori) {
-  state.kategori = kategori;
+export function pilihKategori(kategori) {
+  state.kategoriAktif = kategori;
+  render(state);
+}
+
+export function tambahFavorit(id) {
+  if (state.favorit.includes(id)) return;
+
+  state.favorit = [...state.favorit, id];
   render(state);
 }
