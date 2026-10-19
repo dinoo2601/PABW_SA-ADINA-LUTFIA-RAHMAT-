@@ -24,24 +24,28 @@ export function muat() {
   const teks = localStorage.getItem(KUNCI);
   if (teks === null) return null;
 
+  let isi;
   try {
-    const isi = JSON.parse(teks);
-    if (
-      !isi ||
-      typeof isi !== "object" ||
-      isi.versi !== VERSI ||
-      !KATEGORI_VALID.includes(isi.kategoriAktif) ||
-      !Array.isArray(isi.favorit) ||
-      !isi.favorit.every((id) => Number.isInteger(id))
-    ) {
-      return null;
-    }
-
-    return isi;
+    isi = JSON.parse(teks);
   } catch (galat) {
-    if (galat instanceof SyntaxError) return null;
-    throw galat;
+    if (!(galat instanceof SyntaxError)) throw galat;
+    localStorage.removeItem(KUNCI);
+    return null;
   }
+
+  if (
+    !isi ||
+    typeof isi !== "object" ||
+    isi.versi !== VERSI ||
+    !KATEGORI_VALID.includes(isi.kategoriAktif) ||
+    !Array.isArray(isi.favorit) ||
+    !isi.favorit.every((id) => Number.isInteger(id))
+  ) {
+    localStorage.removeItem(KUNCI);
+    return null;
+  }
+
+  return isi;
 }
 
 export function pulihkan(isi) {
