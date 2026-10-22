@@ -8,15 +8,20 @@ export const state = reactive({
   daftarProyek: [],
   kategoriAktif: 'semua',
   favorit: [],
-  memuat: false,
-  pesanGalat: '',
+  memuat: true,
+  galat: '',
 })
 
-export function simpan() {
+export function simpan(nilai = state) {
+  if (nilai.kategoriAktif === 'semua' && nilai.favorit.length === 0) {
+    localStorage.removeItem(KUNCI)
+    return
+  }
+
   const isi = {
     versi: VERSI,
-    kategoriAktif: state.kategoriAktif,
-    favorit: state.favorit,
+    kategoriAktif: nilai.kategoriAktif,
+    favorit: nilai.favorit,
   }
 
   localStorage.setItem(KUNCI, JSON.stringify(isi))
@@ -65,9 +70,7 @@ export function pilihKategori(kategori) {
   if (!KATEGORI_VALID.includes(kategori)) {
     throw new Error(`Kategori tidak valid: ${kategori}`)
   }
-
   state.kategoriAktif = kategori
-  simpan()
 }
 
 export function tambahFavorit(id) {
@@ -77,12 +80,10 @@ export function tambahFavorit(id) {
   if (state.favorit.includes(id)) return
 
   state.favorit = [...state.favorit, id]
-  simpan()
 }
 
 export function aturUlang() {
-  localStorage.removeItem(KUNCI)
   state.kategoriAktif = 'semua'
   state.favorit = []
-  state.pesanGalat = ''
+  state.galat = ''
 }

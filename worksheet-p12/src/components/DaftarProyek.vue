@@ -9,7 +9,12 @@ const proyekTerpilih = computed(() =>
 </script>
 
 <template>
-  <ul id="daftar" class="katalog" aria-live="polite">
+  <p v-if="state.memuat" id="muat" role="status">Memuat data...</p>
+  <p v-else-if="state.galat" id="galat" role="alert">{{ state.galat }}</p>
+  <p v-else-if="proyekTerpilih.length === 0" id="kosong" role="status">
+    Belum ada materi untuk kategori ini.
+  </p>
+  <ul v-else id="daftar" class="katalog" aria-live="polite">
     <li v-for="materi in proyekTerpilih" :key="materi.id" class="kartu">
       <h3>{{ materi.judul }}</h3>
       <p>{{ materi.deskripsi }}</p>
@@ -26,14 +31,5 @@ const proyekTerpilih = computed(() =>
       </button>
     </li>
   </ul>
-  <p id="muat" role="status" :hidden="!state.memuat">Memuat data...</p>
-  <p
-    id="kosong"
-    role="status"
-    :hidden="state.memuat || Boolean(state.pesanGalat) || proyekTerpilih.length > 0"
-  >
-    Belum ada materi untuk kategori ini.
-  </p>
-  <p id="galat" :hidden="!state.pesanGalat">{{ state.pesanGalat }}</p>
   <button id="atur-ulang" type="button" @click="aturUlang">Atur ulang</button>
 </template>

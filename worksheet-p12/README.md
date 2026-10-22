@@ -13,6 +13,12 @@ Gambar dan data JSON statis berada di `public/`; modul JavaScript P11 berada di
 
 Hanya `KepalaProfil.vue` yang menerima props.
 
+`state.js` menggunakan `reactive()` untuk data proyek, kategori, favorit, status
+memuat, dan galat. Komponen memperbarui tampilan dari state ini tanpa pemanggilan
+`render()` manual. `App.vue` memulihkan preferensi saat dipasang dan memakai
+deep `watch` untuk menyimpan perubahan state ke `localStorage`. Daftar proyek
+menampilkan status memuat, galat, kosong, atau data melalui `v-if`.
+
 Jalankan server pengembangan dengan:
 
 ```sh

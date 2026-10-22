@@ -1,29 +1,32 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
 import KepalaProfil from './components/KepalaProfil.vue'
 import TombolFilter from './components/TombolFilter.vue'
 import DaftarProyek from './components/DaftarProyek.vue'
 import FormKontak from './components/FormKontak.vue'
 import { ambilProyek } from './api.js'
 import { profil } from './data.js'
-import { isiProyek, muat, pulihkan, state } from './state.js'
+import { isiProyek, muat, pulihkan, simpan, state } from './state.js'
 
 document.title = profil.judul
 
 onMounted(async () => {
   pulihkan(muat())
   state.memuat = true
+  state.galat = ''
 
   try {
     isiProyek(await ambilProyek())
   } catch (galat) {
-    state.pesanGalat =
+    state.galat =
       'Data gagal dimuat. Periksa koneksi, lalu muat ulang halaman.'
     console.error(galat)
   } finally {
     state.memuat = false
   }
 })
+
+watch(state, (nilai) => simpan(nilai), { deep: true })
 </script>
 
 <template>
