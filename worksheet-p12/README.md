@@ -1,5 +1,12 @@
-# Vue 3 + Vite
+# Pertemuan 12 — Migrasi ke Vue
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Proyek ini memindahkan halaman P11 ke Vue tanpa mengubah tampilan atau isi
+stylesheet. Enam berkas CSS berada di `src/` dan diimpor melalui `src/main.js`.
+Gambar dan data JSON statis berada di `public/`; modul JavaScript P11 berada di
+`src/` untuk dilanjutkan pada lembar berikutnya.
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+Jalankan server pengembangan dengan:
+
+```sh
+npm run dev
+```
