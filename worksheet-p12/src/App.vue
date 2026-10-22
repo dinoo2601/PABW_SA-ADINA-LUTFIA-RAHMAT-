@@ -1,5 +1,8 @@
 <script setup>
+import { onMounted } from 'vue'
 import { profil } from './data.js'
+
+onMounted(() => import('./app.js'))
 </script>
 
 <template>
@@ -95,3 +98,9 @@ import { profil } from './data.js'
     </footer>
   </div>
 </template>
+
+<style scoped>
+.page p {
+  font-size: inherit;
+}
+</style>
